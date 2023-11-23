@@ -10,8 +10,8 @@ import { hostMatches, shouldNavigate } from "./utils.js";
  * <a href="/post/{postId}" use:link>{post.title}</a>
  * ```
  */
-const link = (node) => {
-    const onClick = (event) => {
+const link = (node: Element) => {
+    const onClick = (event: Event & { currentTarget: HTMLAnchorElement }) => {
         const anchor = event.currentTarget;
 
         if (
@@ -27,14 +27,15 @@ const link = (node) => {
         }
     };
 
-    node.addEventListener("click", onClick);
+    node.addEventListener("click", onClick as EventListener);
 
     return {
         destroy() {
-            node.removeEventListener("click", onClick);
+            node.removeEventListener("click", onClick as EventListener);
         },
     };
 };
+
 /**
  * An action to be added at a root element of your application to
  * capture all relative links and push them onto the history stack.
@@ -52,13 +53,13 @@ const link = (node) => {
  * </div>
  * ```
  */
-const links = (node) => {
-    const findClosest = (tagName, el) => {
-        while (el && el.tagName !== tagName) el = el.parentNode;
+const links = (node: Element) => {
+    const findClosest = <T extends Element>(tagName: string, el: T) => {
+        while (el && el.tagName !== tagName) el = el.parentNode as T;
         return el;
     };
 
-    const onClick = (event) => {
+    const onClick = (event: Event & { target: HTMLAnchorElement }) => {
         const anchor = findClosest("A", event.target);
         if (
             anchor &&
@@ -75,11 +76,11 @@ const links = (node) => {
         }
     };
 
-    node.addEventListener("click", onClick);
+    node.addEventListener("click", onClick as EventListener);
 
     return {
         destroy() {
-            node.removeEventListener("click", onClick);
+            node.removeEventListener("click", onClick as EventListener);
         },
     };
 };
