@@ -33,7 +33,7 @@ export type Viewtransition = {
 export type ActiveRoute = {
 	params: RouteParams;
 	uri: string;
-	route: Route;
+	route: RouteType;
 	preserveScroll?: boolean;
 };
 
@@ -42,7 +42,7 @@ export type RouterBase = {
 	uri: string;
 };
 
-export type Route = {
+export type RouteType = {
 	path: string;
 	default: boolean;
 	_path: string;
@@ -53,8 +53,8 @@ export type RouterContext = {
 	activeRoute: Writable<ActiveRoute | null>;
 	routerBase: Writable<RouterBase>;
 	base: Writable<RouterBase>;
-	registerRoute: (route: Route) => void;
-	unregisterRoute: (route: Route) => void;
+	registerRoute: (route: RouteType) => void;
+	unregisterRoute: (route: RouteType) => void;
 };
 
 export type RouterNavigateOptions = {

@@ -3,7 +3,7 @@
  * https://github.com/reach/router/blob/master/LICENSE
  */
 
-import type { Route } from './types.js';
+import type { RouteType } from './types.js';
 
 const PARAM = /^:(.+)/;
 const SEGMENT_POINTS = 4;
@@ -25,7 +25,7 @@ const stripSlashes = (string: string) => string.replace(/(^\/+|\/+$)/g, '');
 /**
  * Score a route depending on how its individual segments look
  */
-const rankRoute = (route: Route, index: number) => {
+const rankRoute = (route: RouteType, index: number) => {
 	const score = route.default
 		? 0
 		: segmentize(route.path).reduce((score, segment) => {
@@ -50,7 +50,7 @@ const rankRoute = (route: Route, index: number) => {
  * Give a score to all routes and sort them on that
  * If two routes have the exact same score, we go by index instead
  */
-const rankRoutes = (routes: Route[]) =>
+const rankRoutes = (routes: RouteType[]) =>
 	routes
 		.map(rankRoute)
 		.sort((a, b) => (a.score < b.score ? 1 : a.score > b.score ? -1 : a.index - b.index));
@@ -73,7 +73,7 @@ const rankRoutes = (routes: Route[]) =>
  *  { route, params, uri }
  *
  */
-const pick = (routes: Route[], uri: string) => {
+const pick = (routes: RouteType[], uri: string) => {
 	let match;
 	let default_;
 
