@@ -1,6 +1,6 @@
 {
 	"name": "svouter",
-	"version": "0.2.0",
+	"version": "0.2.1",
 	"keywords": [
 		"svelte routing",
 		"svelte",
@@ -44,7 +44,7 @@
 		"!dist/**/*.spec.*"
 	],
 	"peerDependencies": {
-		"svelte": "^4.0.0"
+		"svelte": "^4.0.0||^5.0.0-next.7"
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.28.1",
