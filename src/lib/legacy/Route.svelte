@@ -21,7 +21,8 @@
 		// If no path prop is given, this Route will act as the default Route
 		// that is rendered if no other Route in the Router is a match.
 		default: path === '',
-		_path: path
+		_path: path,
+		canActivate: () => true,
 	};
 
 	$: if ($activeRoute && $activeRoute.route === route) {
