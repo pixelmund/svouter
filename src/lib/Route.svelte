@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Route, RouteParams } from './types.js';
+	import type { RouteType, RouteParams } from './types.js';
 	import { getContext, onDestroy, type SvelteComponent, type Snippet } from 'svelte';
 	import { ROUTER, type Router } from './state.svelte.js';
 
@@ -12,8 +12,8 @@
 		canActivate = true,
 		...rest
 	} = $props<{
-		path: Route['path'];
-		canActivate?: Route['canActivate'];
+		path: RouteType['path'];
+		canActivate?: RouteType['canActivate'];
 		children?: Snippet<{ params: RouteParams; [key: string]: any }>;
 		[key: string]: any;
 	}>();
@@ -30,7 +30,7 @@
 
 	let shouldActivate = $derived(canRouteBeActivated());
 
-	const route: Route = {
+	const route: RouteType = {
 		path,
 		// If no path prop is given, this Route will act as the default Route
 		// that is rendered if no other Route in the Router is a match.
